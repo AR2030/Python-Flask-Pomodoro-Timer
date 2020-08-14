@@ -10,6 +10,7 @@ def home():
     return render_template('index.html',page_name='Home')
 
 @app.route('/timer', methods=['GET', 'POST'])
+@login_required
 def timer():
     form = projectsForm()
     if form.validate_on_submit():
@@ -41,6 +42,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            flash(f'Wellcome {current_user.username}','success')
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -48,6 +50,8 @@ def login():
 
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
+    flash(f'You have been logged out','success')
     return redirect(url_for('home'))
