@@ -70,6 +70,17 @@
   </header>
 
   <!-- First Grid -->
+  <div class="col-md-14" >
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" style="text-align: center;">
+            {{ message }}!
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
   {% block content %}
   <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
     <div class="w3-content">
