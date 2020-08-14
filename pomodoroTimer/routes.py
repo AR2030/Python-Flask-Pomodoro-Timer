@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from pomodoroTimer import app,db,bcrypt
-from pomodoroTimer.forms import projectsForm,RegistrationForm, LoginForm
-from pomodoroTimer.models import User
+from pomodoroTimer.forms import projectsForm,RegistrationForm, LoginForm,SelectProjectsForm
+from pomodoroTimer.models import User,Project
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
@@ -12,11 +12,14 @@ def home():
 @app.route('/timer', methods=['GET', 'POST'])
 @login_required
 def timer():
-    form = projectsForm()
-    if form.validate_on_submit():
-        flash(f'project {form.name.data} Added','success')
-    return render_template('timer.html', page_name="Timer" ,form = form)
-    
+    projectsform = projectsForm()
+    if projectsform.validate_on_submit():
+        projectName = projectsform.name.data
+        project = Project(title=projectName,user_id=current_user.id)
+        db.session.add(project)
+        db.session.commit()
+        flash(f'project {projectName} Added','success')
+    return render_template('timer.html', page_name="Timer" ,projectsform = projectsform,SelectProjectsForm=SelectProjectsForm())
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

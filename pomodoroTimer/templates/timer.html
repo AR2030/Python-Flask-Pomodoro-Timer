@@ -11,50 +11,36 @@
 <body>
     <!--project form-->
     <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
+        <form method="POST" action="/addProject">
+            {{ projectsform.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4" style=" text-align: center;">Add Project</legend>
                 <div class="form-group" style=" text-align: center;">
-                    {{ form.name.label(class="form-control-label") }}
+                    {{ projectsform.name.label(class="form-control-label") }}
 
-                    {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    {% if projectsform.name.errors %}
+                    {{ projectsform.name(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.name.errors %}
+                        {% for error in projectsform.name.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{ form.name(class="form-control form-control-lg") }}
+                    {{ projectsform.name(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-
                 <div class="form-group" style=" text-align: center;">
-                    {{ form.pomodorosNumber.label(class="form-control-label") }}
-                    {% if form.pomodorosNumber.errors %}
-                    {{ form.pomodorosNumber(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.pomodorosNumber.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    {{ form.pomodorosNumber(class="form-control form-control-lg") }}
-                    {% endif %}
+                    {{ projectsform.submit(class="btn btn-outline-info") }}
                 </div>
 
-                <div class="form-group" style=" text-align: center;">
-                    {{ form.submit(class="btn btn-outline-info") }}
-                </div>
+                <!-- border -->
+                <legend class="border-bottom mb-4" style=" text-align: center;"></legend>
 
-            </fieldset>
-        </form>
+                <br>  
+                {{ SelectProjectsForm.name()}}<br><br>  
 
     </div>
-    <!--border after the forms-->
-    <div class="border-top pt-3">
-    </div>
+
 
 
     <!--timer-->
