@@ -34,7 +34,7 @@ def addProject():
 def selectProject():
     form = SelectProjectsForm()
     if request.method == 'POST':
-        myProjects= Project.query.get(user_id==current_user.id)
+        myProjects= Project.query.filter_by(user_id==current_user.id).first()
 
         flash(f'You selected project {form.name.data + myProjects} ','success')
         return(redirect(url_for('timer')))
