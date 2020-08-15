@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     projects = db.relationship('Project', backref='author', lazy=True)
-    
+
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
@@ -22,4 +22,4 @@ class Project(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     def __repr__(self):
-       return f"Project('{self.title}', '{self.user_id}')"
+       return f"{self.title}"

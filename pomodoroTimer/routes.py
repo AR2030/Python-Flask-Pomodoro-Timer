@@ -26,20 +26,21 @@ def addProject():
         db.session.add(project)
         db.session.commit()
         flash(f'project {projectName} Added','success')
-        return(redirect(url_for('timer')))
+        return(redirect(url_for('selectProject')))
     return render_template('addProject.html', page_name="Add a Project",projectsform=projectsform)
 
 @app.route('/selectProject', methods=['GET', 'POST'])
 @login_required
 def selectProject():
-    form = SelectProjectsForm()
-    if request.method == 'POST':
-        myProjects= Project.query.filter_by(user_id==current_user.id).first()
+    user = User.query.get(current_user.id)
+    myProjects= user.projects
 
-        flash(f'You selected project {form.name.data + myProjects} ','success')
+    form = SelectProjectsForm()
+    form.name.choices= myProjects
+    if request.method == 'POST':
+        flash(f'You selected project {form.name.data} to work on ','success')
         return(redirect(url_for('timer')))
     return render_template('selectProject.html', page_name="Timer", form=form)
- 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
