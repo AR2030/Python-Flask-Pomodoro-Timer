@@ -12,6 +12,13 @@ def home():
 @app.route('/timer', methods=['GET', 'POST'])
 @login_required
 def timer():
+    
+    return render_template('timer.html', page_name="Timer")
+
+
+@app.route("/addProject", methods=['GET', 'POST'])
+@login_required
+def addProject():
     projectsform = projectsForm()
     if projectsform.validate_on_submit():
         projectName = projectsform.name.data
@@ -19,7 +26,20 @@ def timer():
         db.session.add(project)
         db.session.commit()
         flash(f'project {projectName} Added','success')
-    return render_template('timer.html', page_name="Timer" ,projectsform = projectsform,SelectProjectsForm=SelectProjectsForm())
+        return(redirect(url_for('timer')))
+    return render_template('addProject.html', page_name="Add a Project",projectsform=projectsform)
+
+@app.route('/selectProject', methods=['GET', 'POST'])
+@login_required
+def selectProject():
+    form = SelectProjectsForm()
+    if request.method == 'POST':
+        myProjects= Project.query.get(user_id==current_user.id)
+
+        flash(f'You selected project {form.name.data + myProjects} ','success')
+        return(redirect(url_for('timer')))
+    return render_template('selectProject.html', page_name="Timer", form=form)
+ 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
