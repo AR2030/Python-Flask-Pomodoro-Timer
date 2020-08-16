@@ -7,8 +7,8 @@ var ws = document.getElementById('w_seconds');
 
 var bm = document.getElementById('b_minutes');
 var bs = document.getElementById('b_seconds');
-var saveToHistory = document.getElementById('save_history')
-console.log(saveToHistory)
+
+
 //store a reference to a timer variable
 var startTimer;
 
@@ -77,12 +77,14 @@ function stopInterval(){
 
 
 // add save to history button
+var saveToHistory = document.getElementById('save_history')
 
 saveToHistory.addEventListener('click', function(){
 
     // send number of cycles to python 
 
     numberOfCyclesDone = document.getElementById('counter').innerText
+    console.log('cycles')
     console.log(numberOfCyclesDone)
     // (async (numberOfCyclesDone) => {
     //     const rawResponse = await fetch("/saveLocation", {
