@@ -1,36 +1,26 @@
 {% extends 'index.html' %}
 {% block page_name %} {{page_name}} {% endblock page_name %}
 {% block content %}
-<table class="table table-dark">
+
+{% if projects %}
+<table class="table table-bordered table-dark">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Project</th>
         <th scope="col">Finished cycels</th>
       </tr>
     </thead>
     <tbody>
         {% for project in projects %}
-            
+        <tr>
+            <th scope="row">{{project.title}}</th>
+            <td>{{project.cyclesDone}}</td>
+        </tr>
         {% endfor %}
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
     </tbody>
   </table>
+  {% else %}
+  <h1 style="color: rgb(0, 0, 0); text-align: center;"> You haven't worked on any project yet! </h1>
+  {% endif %}
+
 {% endblock content %}

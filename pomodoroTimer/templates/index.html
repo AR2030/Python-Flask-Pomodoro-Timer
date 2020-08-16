@@ -46,12 +46,13 @@
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
         href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="{{url_for('home')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-      <a href="{{url_for('timer')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Timer</a>
+      
       
       {% if current_user.is_authenticated %}
+      <a href="{{url_for('timer')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Timer</a>
       <a href="{{url_for('addProject')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Add a project</a>
       <a href="{{url_for('selectProject')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Select project to work on</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">History</a>
+      <a href="{{url_for('history')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">History</a>
       <a href="{{url_for('logout')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
       {% else %}
       <a href="{{url_for('login')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Login</a>

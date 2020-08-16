@@ -4,9 +4,14 @@ from pomodoroTimer.forms import projectsForm,RegistrationForm, LoginForm,SelectP
 from pomodoroTimer.models import User,Project
 from flask_login import login_user, current_user, logout_user, login_required
 
-
+@app.route('/history')
+@login_required
+def history():
+    projects = Project.query.filter_by(user_id=current_user.id).all()
+    return render_template('history.html',projects=projects)    
 
 @app.route('/saveProjectToHistory', methods =["POST"])
+@login_required
 def saveProjectToHistory():
     cyclesDone = request.get_json(force = True)
     project = Project.query.filter_by(user_id=current_user.id).filter_by(title=session["project"]).first()

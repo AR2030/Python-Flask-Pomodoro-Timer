@@ -81,21 +81,9 @@ var saveToHistory = document.getElementById('save_history')
 
 saveToHistory.addEventListener('click', function(){
 
-    // send number of cycles to python 
-
     numberOfCyclesDone = document.getElementById('counter').innerText
-    console.log('cycles')
     console.log(numberOfCyclesDone)
 
-    // (async (test) => {
-    //     const rawResponse = await fetch(" http://127.0.0.1:5000/test", {
-    //       method: "POST",
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ numberOfCyclesDone: numberOfCyclesDone }),
-    //     });
     fetch('/saveProjectToHistory', {
         method: "POST",
         body: JSON.stringify( numberOfCyclesDone),
