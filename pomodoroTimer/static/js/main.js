@@ -96,7 +96,7 @@ saveToHistory.addEventListener('click', function(){
     //       },
     //       body: JSON.stringify({ numberOfCyclesDone: numberOfCyclesDone }),
     //     });
-    fetch('/test', {
+    fetch('/saveProjectToHistory', {
         method: "POST",
         body: JSON.stringify( numberOfCyclesDone),
         headers: new Headers({"testing": "application/json"})

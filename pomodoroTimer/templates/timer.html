@@ -11,9 +11,8 @@
 <body>
 
     <!--timer-->
-    <h1 style="color: rgb(0, 0, 0);">Pomodoro Timer</h1>
-
-
+    {% if project %}
+    <h1 style="color: rgb(0, 0, 0);"> You selected project '{{project}}' to work on</h1>
     <div id="container">
         <p id="work" class="label">Work:</p>
         <p id="break" class="label">Break:</p>
@@ -45,6 +44,13 @@
     </div>
   
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% else %}
+    <h1 style="color: rgb(0, 0, 0);"> You must select a project first</h1>
+    {% endif %}
+   
+
+
+  
 </body>
 
 

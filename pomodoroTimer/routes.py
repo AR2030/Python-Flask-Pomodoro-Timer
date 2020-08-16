@@ -1,13 +1,24 @@
-from flask import render_template, url_for, flash, redirect, request, jsonify
+from flask import render_template, url_for, flash, redirect, request, jsonify,session
 from pomodoroTimer import app,db,bcrypt
 from pomodoroTimer.forms import projectsForm,RegistrationForm, LoginForm,SelectProjectsForm
 from pomodoroTimer.models import User,Project
 from flask_login import login_user, current_user, logout_user, login_required
 
-@app.route('/test', methods =["GET","POST"])
-def test():
-    print(request.get_json(force = True))
-    return ""
+
+
+@app.route('/saveProjectToHistory', methods =["POST"])
+def saveProjectToHistory():
+    cyclesDone = request.get_json(force = True)
+    project = Project.query.filter_by(user_id=current_user.id).filter_by(title=session["project"]).first()
+    previousDoneCycles = project.cyclesDone
+
+    # sum new cycles with  cycles in the database
+    allCyclesDone = int(cyclesDone)+int(previousDoneCycles)
+
+    #update database
+    project.cyclesDone = allCyclesDone
+    db.session.commit()
+    return "saved"
 
 @app.route('/')
 @app.route('/home')
@@ -17,7 +28,7 @@ def home():
 @app.route('/timer', methods=['GET', 'POST'])
 @login_required
 def timer():
-    return render_template('timer.html', page_name="Pomodoro Timer")
+    return render_template('timer.html', page_name="Pomodoro Timer",project=session.get('project'))
 
 
 @app.route("/addProject", methods=['GET', 'POST'])
@@ -42,7 +53,7 @@ def selectProject():
     form = SelectProjectsForm()
     form.name.choices= myProjects
     if request.method == 'POST':
-        flash(f'You selected project {form.name.data} to work on ','success')
+        session['project'] = form.name.data 
         return(redirect(url_for('timer')))
     return render_template('selectProject.html', page_name="Select a Project to work on", form=form)
 
@@ -81,5 +92,6 @@ def login():
 @login_required
 def logout():
     logout_user()
+    session.clear()
     flash(f'You have been logged out','success')
     return redirect(url_for('home'))
