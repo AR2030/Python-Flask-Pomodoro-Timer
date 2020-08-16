@@ -12,8 +12,7 @@ def home():
 @app.route('/timer', methods=['GET', 'POST'])
 @login_required
 def timer():
-    
-    return render_template('timer.html', page_name="Timer")
+    return render_template('timer.html', page_name="Pomodoro Timer")
 
 
 @app.route("/addProject", methods=['GET', 'POST'])
@@ -40,7 +39,7 @@ def selectProject():
     if request.method == 'POST':
         flash(f'You selected project {form.name.data} to work on ','success')
         return(redirect(url_for('timer')))
-    return render_template('selectProject.html', page_name="Timer", form=form)
+    return render_template('selectProject.html', page_name="Select a Project to work on", form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,IntegerField,BooleanField,SubmitField,PasswordField,SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from pomodoroTimer.models import User
+from pomodoroTimer.models import User,Project
 
 
 class projectsForm(FlaskForm):
