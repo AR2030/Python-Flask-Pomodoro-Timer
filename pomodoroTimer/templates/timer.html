@@ -8,12 +8,12 @@
 
 </head>
 
-<body> 
+<body>
 
     <!--timer-->
     <h1 style="color: rgb(0, 0, 0);">Pomodoro Timer</h1>
- 
-    
+
+
     <div id="container">
         <p id="work" class="label">Work:</p>
         <p id="break" class="label">Break:</p>
@@ -37,7 +37,13 @@
         <button id="start" class="btn">Start</button>
         <button id="stop" class="btn">Pause</button>
         <button id="reset" class="btn">Reset</button>
+        <button id = "save_history" style="grid-area: 4 / 4 / 4 / 3; align-self: center;
+        justify-self: center;
+        width: 400px;
+        height: 40px;
+        font-size: 20px;">Save to history and restart the timer</button>
     </div>
+
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
