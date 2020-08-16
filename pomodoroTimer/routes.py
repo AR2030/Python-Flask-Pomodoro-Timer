@@ -1,8 +1,13 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify
 from pomodoroTimer import app,db,bcrypt
 from pomodoroTimer.forms import projectsForm,RegistrationForm, LoginForm,SelectProjectsForm
 from pomodoroTimer.models import User,Project
 from flask_login import login_user, current_user, logout_user, login_required
+
+@app.route('/test', methods =["GET","POST"])
+def test():
+    print(request.get_json(force = True))
+    return ""
 
 @app.route('/')
 @app.route('/home')

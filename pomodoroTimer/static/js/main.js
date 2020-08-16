@@ -86,15 +86,21 @@ saveToHistory.addEventListener('click', function(){
     numberOfCyclesDone = document.getElementById('counter').innerText
     console.log('cycles')
     console.log(numberOfCyclesDone)
-    // (async (numberOfCyclesDone) => {
-    //     const rawResponse = await fetch("/saveLocation", {
+
+    // (async (test) => {
+    //     const rawResponse = await fetch(" http://127.0.0.1:5000/test", {
     //       method: "POST",
     //       headers: {
     //         Accept: "application/json",
     //         "Content-Type": "application/json",
     //       },
-    //       body: JSON.stringify({ coords: coords }),
+    //       body: JSON.stringify({ numberOfCyclesDone: numberOfCyclesDone }),
     //     });
+    fetch('/test', {
+        method: "POST",
+        body: JSON.stringify( numberOfCyclesDone),
+        headers: new Headers({"testing": "application/json"})
+    })
     
     // reset the timer
     wm.innerText = 25;
