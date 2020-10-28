@@ -96,7 +96,8 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
-    logout_user()
     session.clear()
+    logout_user()
+    
     flash(f'You have been logged out','success')
     return redirect(url_for('home'))
